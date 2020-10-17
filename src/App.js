@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Switch, Route } from "react-router-dom";
 import Article from "./Article/Article";
 import DynamicArticle from "./DynamicArticle/DynamicArticle";
+import ArticleList from "./ArticleList/ArticleList";
 import { isEmpty } from "lodash";
 
 function App() {
@@ -10,13 +11,14 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       // put data fetching code here!
-      const result = await fetch(
+      // performs a GET request
+      const response = await fetch(
         "http://demo1390455.mockable.io/articles"
-        );
-      const resultJson = await result.json();
-      setFetchedData(resultJson);
+      );
+      const responseJson = await response.json();
+      setFetchedData(responseJson);
     };
-
+    
     if (isEmpty(fetchedData)) {
       fetchData();
     }
@@ -25,8 +27,11 @@ function App() {
   return isEmpty(fetchedData) ? null : (
     <div className="App">
       <Switch>
-        <Route>
-          <DynamicArticle article={Object.values(fetchedData)[1]} />
+        <Route path="/dynamicarticle">
+          <DynamicArticle article={Object.values(fetchedData)[1]}/>
+        </Route>
+        <Route path="/articlelist">
+          <ArticleList list={Object.values(fetchedData)}/>
         </Route>
       </Switch>
     </div>
