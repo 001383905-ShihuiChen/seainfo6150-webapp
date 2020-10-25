@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import { Switch, Route } from "react-router-dom";
 import Article from "./Article/Article";
 import DynamicArticle from "./DynamicArticle/DynamicArticle";
-import ArticleList from "./ArticleList/ArticleList";
 import { isEmpty } from "lodash";
+import ArticleList from "./ArticleList/ArticleList.jsx"
 
 function App() {
   const [fetchedData, setFetchedData] = useState({});
@@ -11,31 +11,38 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       // put data fetching code here!
-      // performs a GET request
-      const response = await fetch(
-        "http://demo1390455.mockable.io/articles"
-      );
-      const responseJson = await response.json();
-      setFetchedData(responseJson);
+      const result = await fetch("http://demo1390455.mockable.io/articles");
+      const resultJson = await result.json();
+      setFetchedData(resultJson);
     };
-    
+
     if (isEmpty(fetchedData)) {
       fetchData();
     }
   }, [fetchedData]);
 
-  return isEmpty(fetchedData) ? null : (
-    <div className="App">
-      <Switch>
-        <Route path="/dynamicarticle">
-          <DynamicArticle article={Object.values(fetchedData)[1]}/>
-        </Route>
-        <Route path="/articlelist">
-          <ArticleList list={Object.values(fetchedData)}/>
-        </Route>
-      </Switch>
-    </div>
+  let displayContent;
+
+  if (!isEmpty(fetchedData)) {
+    displayContent = (
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <DynamicArticle article={Object.values(fetchedData)[1]} />
+          </Route>
+          <Route path="/articlelist">
+            <ArticleList articles={Object.values(fetchedData)} />
+          </Route>
+        </Switch>
+      </div>
+    );
+  } else {
+    displayContent = <div>You have no data!</div>;
+  }
+
+  return (
+    displayContent
   );
-}
+};
 
 export default App;

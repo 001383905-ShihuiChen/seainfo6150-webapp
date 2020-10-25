@@ -1,17 +1,21 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import ArticleListItem from '../ArticleListItem/ArticleListItem';
+import ArticleListItem from "../ArticleListItem/ArticleListItem.jsx"
+import PropTypes from "prop-types"
+import css from "./ArticleList.module.css"
 
-const ArticleList = (props) => {
-    const myList = props.list
-    const mappedList = myList.map((listItem) => (
-        <li><ArticleListItem article = {listItem}/></li>
-    ))
+const ArticleList = props => {
   return (
-    <article>
-        <ul>{mappedList}</ul>
-    </article>
+    <ul className = {css.articleList}>
+      {props.articles.map(article => (
+        <li key={article.slug}>
+          <ArticleListItem article ={article} />
+        </li>
+      ))}
+    </ul>
   );
 };
 
+ArticleList.propTypes = {
+  articles: PropTypes.array.isRequired
+};
 export default ArticleList;
