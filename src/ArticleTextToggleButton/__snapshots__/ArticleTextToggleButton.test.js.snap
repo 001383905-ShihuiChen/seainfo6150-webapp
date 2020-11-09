@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArticleTextToggleButton Test Renders Correctly 1`] = `
+<div>
+  <button
+    class="button"
+  >
+    Show more
+  </button>
+</div>
+`;
+
+exports[`ArticleTextToggleButton Test renders correctly 1`] = `
+<div>
+  <button
+    class="button"
+  >
+    Show more
+  </button>
+</div>
+`;
