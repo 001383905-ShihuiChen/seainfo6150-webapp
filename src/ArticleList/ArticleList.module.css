@@ -13,4 +13,31 @@
     grid-template-rows: auto;
     align-items: stretch;
   }
+  @media (min-width: 300px) {
+    .container {
+      grid-template-columns: 1fr;
+      background-color: gray;
+    }
+  }
+  
+  @media (min-width: 650px) {
+    .container {
+      grid-template-columns: 1fr 1fr;
+      background-color: pink;
+    }
+  }
+  
+  @media (min-width: 900px) {
+    .container {
+      grid-template-columns: 1fr 1fr 1fr;
+      background-color: white;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .container {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      background-color: gray;
+    }
+  }
   

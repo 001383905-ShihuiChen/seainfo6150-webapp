@@ -2,7 +2,7 @@ import React from "react";
 import ArticleList from "./ArticleList";
 import { fireEvent } from "@testing-library/react";
 
-describe("ArticleList tests", () => {
+describe("ArticleList Tests", () => {
     it("renders correctly when has articles", () => {
         const articles = [
             {
